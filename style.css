@@ -1,1 +1,8 @@
+.navbar{
+  background-color: #212121;
+}
 
+.navbar li{
+  display: inline;
+  color: white;
+}
