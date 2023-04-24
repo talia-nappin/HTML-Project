@@ -27,14 +27,11 @@
 				</li>
 			</ul>
 		</div>
-		<p>Aktualnosci</p>
+		<h1 class="title">Aktualności</h1>
 		<script>
 			//read JSON data from https://dry-shape-1845.fly.dev/ and display it in on the page
-			//data is in format: { "title": "title", "url": "url" "content": "content", "date": "date" }
-			//display it in format: title as a link to url, date, content
+			//data is in format: { "title": "title", "link": "url" "content": "content", "date": "date" }
 			//use fetch() and cors-everywhere to get data from the server
-
-			const div = document.querySelector('.articles');
 
 			fetch('https://dry-shape-1845.fly.dev/')
 				.then((response) => {
@@ -43,16 +40,25 @@
 				.then((data) => {
 					data.forEach((item) => {
 						const article = document.createElement('article');
+						const help_div = document.createElement('div');
 						const title = document.createElement('h2');
 						const date = document.createElement('p');
 						const content = document.createElement('p');
+						const div = document.querySelector('.articles');
 
-						title.innerHTML = `<a href="${item.url}">${item.title}</a>`;
+						title.innerHTML = `<a href="https://www.poznan.pl${item.link}">${item.title}</a>`;
 						date.innerHTML = item.date;
 						content.innerHTML = item.content;
 
-						article.appendChild(title);
-						article.appendChild(date);
+						title.classList.add('article_title');
+						date.classList.add('article_date');
+						content.classList.add('article_content');
+
+						help_div.classList.add('help_div');
+						help_div.appendChild(title);
+						help_div.appendChild(date);
+
+						article.appendChild(help_div);
 						article.appendChild(content);
 
 						div.appendChild(article);

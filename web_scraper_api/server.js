@@ -17,10 +17,11 @@ app.get('/', (req, res) => {
 			const $ = cheerio.load(html);
 			const articles = [];
 			$('article').each((i, el) => {
-				const title = $(el).find('h3').text();
+				const title = $(el).find('h2').text();
 				const date = $(el).find('time').text();
 				const link = $(el).find('a').attr('href');
-				const article = { title, date, link };
+				const content = $(el).find('p').text();
+				const article = { title, link, content, date };
 				articles.push(article);
 			});
 			res.json(articles);
