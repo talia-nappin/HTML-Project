@@ -28,5 +28,37 @@
 			</ul>
 		</div>
 		<p>Aktualnosci</p>
+		<script>
+			//read JSON data from https://dry-shape-1845.fly.dev/ and display it in on the page
+			//data is in format: { "title": "title", "url": "url" "content": "content", "date": "date" }
+			//display it in format: title as a link to url, date, content
+			//use fetch() and cors-everywhere to get data from the server
+
+			const div = document.querySelector('.articles');
+
+			fetch('https://dry-shape-1845.fly.dev/')
+				.then((response) => {
+					return response.json();
+				})
+				.then((data) => {
+					data.forEach((item) => {
+						const article = document.createElement('article');
+						const title = document.createElement('h2');
+						const date = document.createElement('p');
+						const content = document.createElement('p');
+
+						title.innerHTML = `<a href="${item.url}">${item.title}</a>`;
+						date.innerHTML = item.date;
+						content.innerHTML = item.content;
+
+						article.appendChild(title);
+						article.appendChild(date);
+						article.appendChild(content);
+
+						div.appendChild(article);
+					});
+				});
+		</script>
+		<div class="articles"></div>
 	</body>
 </html>

@@ -1,10 +1,15 @@
 //server that will scrape https://www.poznan.pl/mim/info/news/ for all <article> tags and return them as JSON response
 
+//implement cors to allow cross-origin requests
+
 const express = require('express');
 const request = require('request');
 const cheerio = require('cheerio');
+const cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 app.get('/', (req, res) => {
 	request('https://www.poznan.pl/mim/info/news/', (error, response, html) => {
